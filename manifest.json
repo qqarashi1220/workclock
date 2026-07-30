@@ -1,0 +1,25 @@
+{
+  "name": "工时打卡",
+  "short_name": "打卡",
+  "description": "可多次打卡的工时记录与工资结算工具",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#4a7dff",
+  "theme_color": "#4a7dff",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
