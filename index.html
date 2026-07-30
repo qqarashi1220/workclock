@@ -4,16 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<title>工时打卡</title>
-<link rel="manifest" href="./manifest.json">
-<link rel="icon" type="image/png" href="./icon-192.png">
-<link rel="apple-touch-icon" href="./icon-192.png">
-<meta name="theme-color" content="#4a7dff">
-<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="工时打卡">
-
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#4a7dff">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icon-192.png">
+<title>工时打卡</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: #f0f2f5; color: #333; font-size: 14px; padding-bottom: 70px; }
@@ -275,7 +271,7 @@ button { font-family: inherit; }
   .tabbar, .toast, .modal-overlay, .segment-modal, .time-edit-modal, .backfill-modal, .jpg-preview-overlay, .print-preview-overlay { display: none !important; }
 }
 
-/* ===== JPG Preview Overlay (inline DOM, no window.open) ===== */
+/* JPG Preview Overlay */
 .jpg-preview-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); z-index: 500; flex-direction: column; align-items: center; justify-content: flex-start; padding: 20px 10px; overflow-y: auto; }
 .jpg-preview-overlay.show { display: flex; }
 .jpg-preview-bar { display: flex; align-items: center; gap: 10px; background: rgba(74,125,255,0.95); color: #fff; border-radius: 12px; padding: 10px 16px; margin-bottom: 12px; width: 100%; max-width: 500px; }
@@ -287,7 +283,7 @@ button { font-family: inherit; }
 .jpg-preview-tips { font-size: 12px; color: #ffd700; text-align: center; margin-top: 12px; line-height: 1.8; padding: 0 10px; }
 .jpg-preview-tips .highlight { background: rgba(255,215,0,0.2); padding: 2px 8px; border-radius: 4px; }
 
-/* ===== Print Preview Overlay (inline DOM, no window.open) ===== */
+/* Print Preview Overlay */
 .print-preview-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); z-index: 500; flex-direction: column; align-items: center; justify-content: flex-start; padding: 20px 10px; overflow-y: auto; }
 .print-preview-overlay.show { display: flex; }
 .print-preview-bar { display: flex; align-items: center; gap: 10px; background: rgba(74,125,255,0.95); color: #fff; border-radius: 12px; padding: 10px 16px; margin-bottom: 12px; width: 100%; max-width: 500px; }
@@ -319,11 +315,11 @@ button { font-family: inherit; }
   <div class="header">
     <div class="header-top">
       <div class="month-nav">
-        <button onclick="changeMonth(-1)">◀</button>
+        <button onclick="changeMonth(-1)">&#9664;</button>
         <span id="currentMonthLabel">2026-07</span>
-        <button onclick="changeMonth(1)">▶</button>
+        <button onclick="changeMonth(1)">&#9654;</button>
       </div>
-      <button class="menu-btn" onclick="showToast('去「工资表」页面可导出表格')">📋</button>
+      <button class="menu-btn" onclick="showToast('去「工资表」页面可导出表格')">&#128203;</button>
     </div>
     <div class="summary">
       <div class="summary-item"><div class="value" id="monthWage">0</div><div class="label">月收入(元)</div></div>
@@ -333,9 +329,9 @@ button { font-family: inherit; }
   </div>
 
   <div class="settle-bar">
-    <div class="sb-item"><div class="sb-val green" id="settlePaid">0</div><div class="sb-lbl">✅ 已结算(元)</div></div>
+    <div class="sb-item"><div class="sb-val green" id="settlePaid">0</div><div class="sb-lbl">&#9989; 已结算(元)</div></div>
     <div class="sb-divider"></div>
-    <div class="sb-item"><div class="sb-val red" id="settleUnpaid">0</div><div class="sb-lbl">⏳ 待结算(元)</div></div>
+    <div class="sb-item"><div class="sb-val red" id="settleUnpaid">0</div><div class="sb-lbl">&#9203; 待结算(元)</div></div>
     <div class="sb-divider"></div>
     <div class="sb-item"><div class="sb-val" id="settlePct" style="color:var(--blue);">0%</div><div class="sb-lbl">结算进度</div></div>
   </div>
@@ -343,11 +339,11 @@ button { font-family: inherit; }
   <div class="clock-section">
     <div class="clock-row">
       <button class="clock-btn start" onclick="quickClock('start')">
-        <span>🟢 上班打卡</span>
+        <span>&#128994; 上班打卡</span>
         <span class="btn-sub" id="startBtnSub">记录本次上班时间</span>
       </button>
       <button class="clock-btn end" onclick="quickClock('end')">
-        <span>🔴 下班打卡</span>
+        <span>&#128308; 下班打卡</span>
         <span class="btn-sub" id="endBtnSub">记录本次下班时间</span>
       </button>
     </div>
@@ -359,7 +355,7 @@ button { font-family: inherit; }
   </div>
 
   <div class="today-card" id="todayCard">
-    <div class="title">📅 今日记录 <span class="date-text" id="todayDateText"></span></div>
+    <div class="title">&#128197; 今日记录 <span class="date-text" id="todayDateText"></span></div>
     <div class="segment-list" id="todaySegments"></div>
     <div class="today-summary" id="todaySummary" style="display:none;">
       <div class="ts-item"><div class="ts-val blue" id="todayHours">0</div><div class="ts-lbl">工时(h)</div></div>
@@ -368,13 +364,13 @@ button { font-family: inherit; }
   </div>
 
   <div class="record-section">
-    <div class="title"><span>📋 本月记录</span><button class="batch-btn" onclick="settleAllMonth()">一键结清本月</button></div>
+    <div class="title"><span>&#128203; 本月记录</span><button class="batch-btn" onclick="settleAllMonth()">一键结清本月</button></div>
     <div class="cycle-setting"><label>结算周期</label><input type="number" id="cycleInput" value="3" min="1" max="31" onchange="updateCycle()"><span>天一结算</span></div>
     <div id="recordGroups"></div>
   </div>
 
   <div style="padding:0 16px;margin-bottom:12px;">
-    <button onclick="openBackfillModal()" style="width:100%;background:linear-gradient(135deg,var(--orange),#e67e22);color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;">📝 补录历史月份工作</button>
+    <button onclick="openBackfillModal()" style="width:100%;background:linear-gradient(135deg,var(--orange),#e67e22);color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;">&#128221; 补录历史月份工作</button>
   </div>
 </div>
 
@@ -382,9 +378,9 @@ button { font-family: inherit; }
 <div class="page" id="page-calendar">
   <div class="calendar-page">
     <div class="calendar-header">
-      <button onclick="changeCalMonth(-1)">◀</button>
+      <button onclick="changeCalMonth(-1)">&#9664;</button>
       <span class="current-month" id="calMonthLabel"></span>
-      <button onclick="changeCalMonth(1)">▶</button>
+      <button onclick="changeCalMonth(1)">&#9654;</button>
     </div>
     <div class="calendar-grid">
       <div class="weekday-header"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
@@ -396,7 +392,7 @@ button { font-family: inherit; }
 <!-- ===== 统计页 ===== -->
 <div class="page" id="page-stats">
   <div class="stats-card">
-    <div class="big-label">📊 工时统计</div>
+    <div class="big-label">&#128222; 工时统计</div>
     <div class="stats-row">
       <div class="s-item"><div class="sv" id="statTotalWage" style="color:var(--green);">0</div><div class="sl">总收入</div></div>
       <div class="s-item"><div class="sv" id="statTotalHours" style="color:var(--blue);">0</div><div class="sl">总工时</div></div>
@@ -404,7 +400,7 @@ button { font-family: inherit; }
     </div>
   </div>
   <div class="stats-card">
-    <div class="big-label">📈 近7周工时柱状图</div>
+    <div class="big-label">&#128200; 近7周工时柱状图</div>
     <div class="bar-chart" id="barChart"></div>
   </div>
   <div class="stats-card">
@@ -418,9 +414,9 @@ button { font-family: inherit; }
   <div class="payslip-page">
     <div class="payslip-card">
       <div class="ps-title">
-        <span class="ps-month-nav"><button onclick="changePayslipMonth(-1)">◀</button></span>
+        <span class="ps-month-nav"><button onclick="changePayslipMonth(-1)">&#9664;</button></span>
         <span id="payslipMonthLabel">2026年7月 工资表</span>
-        <span class="ps-month-nav"><button onclick="changePayslipMonth(1)">▶</button></span>
+        <span class="ps-month-nav"><button onclick="changePayslipMonth(1)">&#9654;</button></span>
       </div>
       <table class="payslip-table" id="payslipTable">
         <thead>
@@ -430,19 +426,19 @@ button { font-family: inherit; }
         <tfoot id="payslipFoot"></tfoot>
       </table>
       <div class="export-buttons">
-        <button class="export-btn copy" onclick="doExport('copy')">📋 复制文本</button>
-        <button class="export-btn share" onclick="doExport('share')">📤 分享</button>
-        <button class="export-btn download" onclick="doExport('download')">📥 下载CSV</button>
-        <button class="export-btn print" onclick="doExport('print')">🖨️ 打印预览</button>
-        <button class="export-btn jpg" onclick="doExport('jpg')">🖼️ 保存为图片</button>
+        <button class="export-btn copy" onclick="doExport('copy')">&#128203; 复制文本</button>
+        <button class="export-btn share" onclick="doExport('share')">&#128228; 分享</button>
+        <button class="export-btn download" onclick="doExport('download')">&#128229; 下载CSV</button>
+        <button class="export-btn print" onclick="doExport('print')">&#128424; 打印预览</button>
+        <button class="export-btn jpg" onclick="doExport('jpg')">&#128444; 保存为图片</button>
       </div>
       <p style="text-align:center;font-size:11px;color:#bbb;margin-top:10px;">
-        💡 推荐：点「🖼️ 保存为图片」→ 图片弹出后<b>长按图片</b>即可存到相册<br>
-        📱 也可以先试「📋 复制文本」粘贴到微信发给老板
+        &#128161; 推荐：点&#128444;保存为图片 → 弹出后<b>长按图片</b>即可存到相册<br>
+        &#128241; 也可以先试&#128203;复制文本粘贴到微信发给老板
       </p>
     </div>
     <div class="stats-card">
-      <div class="big-label">📋 月度工资汇总</div>
+      <div class="big-label">&#128203; 月度工资汇总</div>
       <div class="stats-row">
         <div class="s-item"><div class="sv" id="psTotalWage" style="color:var(--green);">0</div><div class="sl">应发工资(元)</div></div>
         <div class="s-item"><div class="sv" id="psTotalHours" style="color:var(--blue);">0</div><div class="sl">总工时</div></div>
@@ -460,7 +456,7 @@ button { font-family: inherit; }
 <!-- ===== 备忘页 ===== -->
 <div class="page" id="page-memo">
   <div class="stats-card">
-    <div class="big-label">📝 备忘</div>
+    <div class="big-label">&#128221; 备忘</div>
     <div class="memo-input-row">
       <input type="text" id="memoInput" placeholder="记点什么...">
       <button onclick="addMemo()">添加</button>
@@ -472,7 +468,7 @@ button { font-family: inherit; }
 <!-- ===== 设置页 ===== -->
 <div class="page" id="page-settings">
   <div class="settings-card">
-    <h3>⚙️ 设置</h3>
+    <h3>&#9881;&#65039; 设置</h3>
     <div class="setting-row"><label>时薪(元/h)</label><input type="number" id="setRate" value="0" min="0" step="0.5"></div>
     <div class="setting-row"><label>午休扣除(分钟)</label><input type="number" id="setBreak" value="0" min="0"></div>
     <div class="setting-row"><label>扣除方式</label>
@@ -489,7 +485,7 @@ button { font-family: inherit; }
     <button onclick="saveSettings()" style="width:100%;background:var(--blue);color:#fff;border:none;border-radius:10px;padding:12px;font-size:15px;font-weight:600;cursor:pointer;margin-top:12px;">保存设置</button>
   </div>
   <div class="settings-card">
-    <h3>📤 数据管理</h3>
+    <h3>&128228; 数据管理</h3>
     <div class="setting-row"><label>导出数据</label><button onclick="exportJSON()" style="background:var(--blue);color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:13px;cursor:pointer;">导出JSON</button></div>
     <div class="setting-row"><label>导入数据</label><input type="file" accept=".json" onchange="importData(event)" style="font-size:12px;"></div>
     <div class="setting-row"><label>清空数据</label><button onclick="clearAllData()" style="background:var(--red);color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:13px;cursor:pointer;">清空全部</button></div>
@@ -498,12 +494,12 @@ button { font-family: inherit; }
 
 <!-- 底部导航 -->
 <div class="tabbar">
-  <div class="tab-item active" onclick="switchTab('home', this)"><span class="icon">🏠</span><span>首页</span></div>
-  <div class="tab-item" onclick="switchTab('calendar', this)"><span class="icon">📅</span><span>日历</span></div>
-  <div class="tab-item" onclick="switchTab('stats', this)"><span class="icon">📊</span><span>统计</span></div>
-  <div class="tab-item" onclick="switchTab('payslip', this)"><span class="icon">📋</span><span>工资表</span></div>
-  <div class="tab-item" onclick="switchTab('memo', this)"><span class="icon">📝</span><span>备忘</span></div>
-  <div class="tab-item" onclick="switchTab('settings', this)"><span class="icon">⚙️</span><span>设置</span></div>
+  <div class="tab-item active" onclick="switchTab('home', this)"><span class="icon">&#127968;</span><span>首页</span></div>
+  <div class="tab-item" onclick="switchTab('calendar', this)"><span class="icon">&#128197;</span><span>日历</span></div>
+  <div class="tab-item" onclick="switchTab('stats', this)"><span class="icon">&#128222;</span><span>统计</span></div>
+  <div class="tab-item" onclick="switchTab('payslip', this)"><span class="icon">&#128203;</span><span>工资表</span></div>
+  <div class="tab-item" onclick="switchTab('memo', this)"><span class="icon">&#128221;</span><span>备忘</span></div>
+  <div class="tab-item" onclick="switchTab('settings', this)"><span class="icon">&#9881;&#65039;</span><span>设置</span></div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -524,8 +520,8 @@ button { font-family: inherit; }
     <h3 id="segModalTitle">添加打卡时间段</h3>
     <p class="seg-desc">不限次数，每次上下班都可以记录</p>
     <div class="seg-type-toggle">
-      <div class="seg-type-btn start active" id="segTypeStart" onclick="setSegType('start')">🟢 上班</div>
-      <div class="seg-type-btn end" id="segTypeEnd" onclick="setSegType('end')">🔴 下班</div>
+      <div class="seg-type-btn start active" id="segTypeStart" onclick="setSegType('start')">&#128994; 上班</div>
+      <div class="seg-type-btn end" id="segTypeEnd" onclick="setSegType('end')">&#128308; 下班</div>
     </div>
     <div class="seg-time-row"><label>上班时间</label><input type="time" id="segStartTime" value="08:00"></div>
     <div class="seg-time-row"><label>下班时间</label><input type="time" id="segEndTime" value="12:00"></div>
@@ -553,7 +549,7 @@ button { font-family: inherit; }
 <!-- 补录历史月份弹窗 -->
 <div class="backfill-modal" id="backfillModal">
   <div class="backfill-box">
-    <h3>📅 补录历史工作记录</h3>
+    <h3>&#128197; 补录历史工作记录</h3>
     <p class="bf-desc">选择要补录的日期，然后填写上下班时间</p>
     <div class="bf-date-row">
       <label>年份</label>
@@ -566,7 +562,7 @@ button { font-family: inherit; }
     <div class="bf-target" id="bfTarget">补录日期：--</div>
     <div class="bf-existing" id="bfExisting"></div>
     <div class="bf-quick">
-      <div class="bf-quick-title">⚡ 快速添加时间段</div>
+      <div class="bf-quick-title">&#9889; 快速添加时间段</div>
       <div class="quick-add-row">
         <label>上班</label><input type="time" id="bfQuickStart" value="08:00">
         <label style="margin-left:6px;">下班</label><input type="time" id="bfQuickEnd" value="12:00">
@@ -579,7 +575,7 @@ button { font-family: inherit; }
       </div>
     </div>
     <div class="bf-manual">
-      <div class="bf-manual-title">✍️ 手动输入一段</div>
+      <div class="bf-manual-title">&#9997;&#65039; 手动输入一段</div>
       <div class="seg-time-row"><label>上班</label><input type="time" id="bfSegStart" value="09:00"></div>
       <div class="seg-time-row"><label>下班</label><input type="time" id="bfSegEnd" value="18:00"></div>
       <div class="seg-actions" style="margin-top:8px;">
@@ -588,225 +584,359 @@ button { font-family: inherit; }
       </div>
     </div>
     <div class="bf-tips">
-      💡 切换日期可补录任意历史月份<br>
-      💡 已补录的记录会即时保存到本地
+      &#128161; 切换日期可补录任意历史月份<br>
+      &#128161; 已补录的记录会即时保存到本地
     </div>
   </div>
 </div>
 
-<!-- ===== JPG 图片预览弹层（内嵌DOM，不用window.open，不用Blob URL） ===== -->
+<!-- JPG 图片预览弹层 -->
 <div class="jpg-preview-overlay" id="jpgPreviewOverlay">
   <div class="jpg-preview-bar">
-    <span class="bar-title">🖼️ 工资表图片</span>
-    <button onclick="closeJpgPreview()">✕ 关闭</button>
+    <span class="bar-title">&#128444;&#65039; 工资表图片</span>
+    <button onclick="closeJpgPreview()">&#10005; 关闭</button>
   </div>
   <div class="jpg-preview-img-wrap">
     <img id="jpgPreviewImg" src="" alt="工资表">
   </div>
   <div class="jpg-preview-tips">
-    👇 <span class="highlight">用手指长按上方图片</span> → 选「存储图像」或「存储到文件」<br>
-    📱 安卓：存到 Download 文件夹 &nbsp;|&nbsp; iPhone：存到相册或文件App<br>
-    ⚠️ 图片是临时显示的，请手动保存，不会自动下载
+    &#128071; <span class="highlight">用手指长按上方图片</span> &rarr; 选&#12304;存储图像&#12305;或&#12305;存储到文件&#12305;<br>
+    &#128241; 安卓：存到 Download 文件夹 | iPhone：存到相册或文件App<br>
+    &#9888;&#65039; 图片是临时显示的，请手动保存，不会自动下载
   </div>
 </div>
 
-<!-- ===== 打印预览弹层（内嵌DOM，不用window.open） ===== -->
+<!-- 打印预览弹层 -->
 <div class="print-preview-overlay" id="printPreviewOverlay">
   <div class="print-preview-bar">
-    <span class="bar-title">🖨️ 打印预览</span>
-    <button onclick="doPrintFromPreview()">🖨️ 系统打印</button>
-    <button onclick="closePrintPreview()">✕ 关闭</button>
+    <span class="bar-title">&#128424; 打印预览</span>
+    <button onclick="doPrintFromPreview()">&#128424; 系统打印</button>
+    <button onclick="closePrintPreview()">&#10005; 关闭</button>
   </div>
   <div class="print-preview-img-wrap">
     <img id="printPreviewImg" src="" alt="打印预览">
   </div>
   <div class="print-preview-tips">
-    👆 点上方「🖨️ 系统打印」→ 调出打印菜单 → 选「存储为PDF」或打印机<br>
-    💡 如果打印菜单没弹出，请允许浏览器弹出窗口
+    &#128070; 点上方&#128424;系统打印 &rarr; 调出打印菜单 &rarr; 选&#12304;存储为PDF&#12305;或打印机<br>
+    &#128161; 如果打印菜单没弹出，请允许浏览器弹出窗口
   </div>
 </div>
 
 <script>
-
-// ===== 工具：本地日期字符串 =====
+// ===== 工具函数 =====
 function todayStr(){
-  const n=new Date();
-  const y=n.getFullYear();
-  const m=String(n.getMonth()+1).padStart(2,'0');
-  const d=String(n.getDate()).padStart(2,'0');
+  var n=new Date();
+  var y=n.getFullYear();
+  var m=String(n.getMonth()+1).padStart(2,'0');
+  var d=String(n.getDate()).padStart(2,'0');
   return y+'-'+m+'-'+d;
 }
 function todayDisplay(){
-  const n=new Date();
-  const days=['周日','周一','周二','周三','周四','周五','周六'];
-  return n.getMonth()+1+'月'+n.getDate()+'日 '+days[n.getDay()];
+  var n=new Date();
+  var days=['周日','周一','周二','周三','周四','周五','周六'];
+  return (n.getMonth()+1)+'月'+n.getDate()+'日 '+days[n.getDay()];
 }
-function fmtTime(t){if(!t)return '--:--';const p=t.split(':');return String(p[0]).padStart(2,'0')+':'+String(p[1]||'0').padStart(2,'0');}
-function parseDate(s){const p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2]);}
-function formatDateFull(s){const d=parseDate(s);return (d.getMonth()+1)+'月'+d.getDate()+'日';}
-function weekDay(s){return ['周日','周一','周二','周三','周四','周五','周六'][parseDate(s).getDay()];}
+function fmtTime(t){
+  if(!t)return '--:--';
+  var p=t.split(':');
+  return String(p[0]).padStart(2,'0')+':'+String(p[1]||'0').padStart(2,'0');
+}
+function parseDate(s){
+  var p=s.split('-');
+  return new Date(+p[0],+p[1]-1,+p[2]);
+}
+function formatDateFull(s){
+  var d=parseDate(s);
+  return (d.getMonth()+1)+'月'+d.getDate()+'日';
+}
+function weekDay(s){
+  return ['周日','周一','周二','周三','周四','周五','周六'][parseDate(s).getDay()];
+}
 
 // ===== 全局状态 =====
-let records=[],memos=[];
-let settings={rate:0,breakMinutes:0,breakMode:'total',overtimeThreshold:8,overtimeRate:1,settleCycle:3,workerName:'',workerId:''};
-let currentMonth=new Date().getMonth(),currentYear=new Date().getFullYear();
-let calMonth=new Date().getMonth(),calYear=new Date().getFullYear();
-let payslipMonth=new Date().getMonth(),payslipYear=new Date().getFullYear();
-let segType='start';
+var records=[];
+var memos=[];
+var settings={
+  rate:0,
+  breakMinutes:0,
+  breakMode:'total',
+  overtimeThreshold:8,
+  overtimeRate:1,
+  settleCycle:3,
+  workerName:'',
+  workerId:''
+};
+var currentMonth=new Date().getMonth();
+var currentYear=new Date().getFullYear();
+var calMonth=new Date().getMonth();
+var calYear=new Date().getFullYear();
+var payslipMonth=new Date().getMonth();
+var payslipYear=new Date().getFullYear();
+var segType='start';
+var editTargetDate=null;
+var editSegIndex=null;
 
 // ===== 数据持久化 =====
-const STORE='workclock_data_v1';
-function saveData(){try{localStorage.setItem(STORE,JSON.stringify({records,memos,settings}));}catch(e){}}
-function loadData(){try{const d=JSON.parse(localStorage.getItem(STORE)||'{}');if(d.records)d.records.forEach(r=>{if(typeof r.settled!=='boolean')r.settled=false;if(!r.segments&&r.start&&r.end)r.segments=[{start:r.start,end:r.end}];});records=d.records||[];memos=d.memos||[];if(d.settings)settings={...settings,...d.settings};}catch(e){}}
+var STORE='workclock_data_v1';
+function saveData(){
+  try{
+    localStorage.setItem(STORE,JSON.stringify({records:records,memos:memos,settings:settings}));
+  }catch(e){}
+}
+function loadData(){
+  try{
+    var raw=localStorage.getItem(STORE);
+    if(!raw)return;
+    var d=JSON.parse(raw);
+    if(d.records){
+      d.records.forEach(function(r){
+        if(typeof r.settled!=='boolean')r.settled=false;
+        if(!r.segments&&r.start&&r.end)r.segments=[{start:r.start,end:r.end}];
+        if(!r.segments)r.segments=[];
+      });
+      records=d.records;
+    }
+    if(d.memos)memos=d.memos;
+    if(d.settings)settings=Object.assign(settings,d.settings);
+  }catch(e){}
+}
 
 // ===== 计算 =====
-function calcSegHours(s,e){if(!s||!e)return 0;const[a,b]=[s,e].map(t=>{const p=t.split(':');return +p[0]*60+(+p[1]||0);});let diff=b-a;if(diff<0)diff+=24*60;return Math.round(diff/6)/10;}
-function calcWage(h){const ot=settings.overtimeThreshold||8,r=settings.overtimeRate||1;return h<=ot?Math.round(h*settings.rate):Math.round(ot*settings.rate+(h-ot)*settings.rate*r);}
-function getMonthRecs(y,m){return records.filter(r=>{const d=parseDate(r.date);return d.getFullYear()===y&&d.getMonth()===m;}).sort((a,b)=>a.date<b.date?1:-1);}
-function getRecord(d){return records.find(r=>r.date===d);}
-function ensureRecord(d){let r=getRecord(d);if(!r){r={date:d,segments:[],hours:0,wage:0,settled:false};records.push(r);}return r;}
+function calcSegHours(s,e){
+  if(!s||!e)return 0;
+  var a=+s.split(':')[0]*60+(+s.split(':')[1]);
+  var b=+e.split(':')[0]*60+(+e.split(':')[1]);
+  var diff=b-a;
+  if(diff<0)diff+=1440;
+  return Math.round(diff/6)/10;
+}
+function calcWage(h){
+  var ot=settings.overtimeThreshold||8;
+  var r=settings.overtimeRate||1;
+  if(h<=ot)return Math.round(h*settings.rate);
+  return Math.round(ot*settings.rate+(h-ot)*settings.rate*r);
+}
+function getMonthRecs(y,m){
+  return records.filter(function(r){
+    var d=parseDate(r.date);
+    return d.getFullYear()===y&&d.getMonth()===m;
+  }).sort(function(a,b){return a.date<b.date?1:-1;});
+}
+function getRecord(d){
+  return records.find(function(r){return r.date===d;});
+}
+function ensureRecord(d){
+  var r=getRecord(d);
+  if(!r){
+    r={date:d,segments:[],hours:0,wage:0,settled:false};
+    records.push(r);
+  }
+  return r;
+}
 
 // ===== Toast =====
-let toastTimer;
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2200);}
+var toastTimer;
+function showToast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){t.classList.remove('show');},2200);
+}
 
 // ===== 打卡 =====
 function quickClock(type){
-  const now=new Date();
-  const hh=String(now.getHours()).padStart(2,'0');
-  const mm=String(now.getMinutes()).padStart(2,'0');
-  const time=hh+':'+mm;
-  const today=todayStr();
-  const rec=ensureRecord(today);
+  var now=new Date();
+  var hh=String(now.getHours()).padStart(2,'0');
+  var mm=String(now.getMinutes()).padStart(2,'0');
+  var time=hh+':'+mm;
+  var today=todayStr();
+  var rec=ensureRecord(today);
   if(type==='start'){
     rec.segments.push({start:time,end:''});
-    showToast('✅ 上班打卡: '+time);
+    showToast('上班打卡: '+time);
   }else{
-    const open=rec.segments.filter(s=>s.start&&!s.end).pop();
-    if(open){open.end=time;showToast('✅ 下班打卡: '+time+' 工时 '+calcSegHours(open.start,open.end)+'h');}
-    else{rec.segments.push({start:'',end:time});showToast('⚠️ 下班打卡: '+time+' (无对应上班,默认4h前)');}
+    var open=rec.segments.filter(function(s){return s.start&&!s.end;}).pop();
+    if(open){
+      open.end=time;
+      showToast('下班打卡: '+time+' 工时 '+calcSegHours(open.start,open.end)+'h');
+    }else{
+      rec.segments.push({start:'',end:time});
+      showToast('下班打卡: '+time+' (无对应上班)');
+    }
   }
-  rec.segments.forEach(s=>{if(s.start&&s.end){s.hours=calcSegHours(s.start,s.end);}else{s.hours=0;}});
-  rec.hours=rec.segments.reduce((s,x)=>s+(x.hours||0),0);
+  rec.segments.forEach(function(s){
+    if(s.start&&s.end)s.hours=calcSegHours(s.start,s.end);
+    else s.hours=0;
+  });
+  rec.hours=rec.segments.reduce(function(s,x){return s+x.hours;},0);
   rec.wage=calcWage(rec.hours);
-  saveData();refreshAll();
+  saveData();
+  refreshAll();
 }
 
 // ===== 首页渲染 =====
 function refreshHome(){
-  const y=currentYear,m=currentMonth;
+  var y=currentYear,m=currentMonth;
   document.getElementById('currentMonthLabel').textContent=y+'-'+String(m+1).padStart(2,'0');
-  const mr=getMonthRecs(y,m);
-  const tw=mr.reduce((s,r)=>s+r.wage,0),th=mr.reduce((s,r)=>s+r.hours,0);
+  var mr=getMonthRecs(y,m);
+  var tw=mr.reduce(function(s,r){return s+r.wage;},0);
+  var th=mr.reduce(function(s,r){return s+r.hours;},0);
   document.getElementById('monthWage').textContent=tw;
   document.getElementById('monthHours').textContent=th.toFixed(1);
   document.getElementById('monthDays').textContent=mr.length;
-  const sw=mr.filter(r=>r.settled).reduce((s,r)=>s+r.wage,0);
+  var sw=mr.filter(function(r){return r.settled;}).reduce(function(s,r){return s+r.wage;},0);
   document.getElementById('settlePaid').textContent=sw;
   document.getElementById('settleUnpaid').textContent=tw-sw;
   document.getElementById('settlePct').textContent=mr.length?Math.round(sw/tw*100)||0+'%':'0%';
 
   // 今日
-  const today=todayStr();
-  const tRec=getRecord(today);
+  var today=todayStr();
+  var tRec=getRecord(today);
   document.getElementById('todayDateText').textContent=todayDisplay();
-  const segList=document.getElementById('todaySegments');
+  var segList=document.getElementById('todaySegments');
   if(tRec&&tRec.segments.length){
-    segList.innerHTML=tRec.segments.map((s,i)=>`<div class="segment-item"><div class="seg-row1"><span class="seg-time">🕐 ${fmtTime(s.start)}${s.end?' → '+fmtTime(s.end):' → 进行中'}</span></div><div class="seg-row2"><div class="seg-info"><span class="seg-hours">${s.end?calcSegHours(s.start,s.end)+'h':'--'}</span><span class="seg-wage">${s.end?calcWage(calcSegHours(s.start,s.end))+'元':'--'}</span></div><div class="seg-actions"><button class="seg-edit" onclick="editSegment('${today}',${i})">✏️</button><button class="seg-del" onclick="deleteSegment('${today}',${i})">🗑</button></div></div></div>`).join('');
+    segList.innerHTML=tRec.segments.map(function(s,i){
+      return '<div class="segment-item"><div class="seg-row1"><span class="seg-time">&#128368; '+fmtTime(s.start)+(s.end?' &rarr; '+fmtTime(s.end):' &rarr; 进行中')+'</span></div><div class="seg-row2"><div class="seg-info"><span class="seg-hours">'+(s.end?calcSegHours(s.start,s.end)+'h':'--')+'</span><span class="seg-wage">'+(s.end?calcWage(calcSegHours(s.start,s.end))+'元':'--')+'</span></div><div class="seg-actions"><button class="seg-edit" onclick="editSegment(\''+today+'\','+i+')">&#9998;&#65039;</button><button class="seg-del" onclick="deleteSegment(\''+today+'\','+i+')">&#128465;</button></div></div></div>';
+    }).join('');
     document.getElementById('todaySummary').style.display='';
-    document.getElementById('todayHours').textContent=(tRec.hours||0);
+    document.getElementById('todayHours').textContent=tRec.hours;
     document.getElementById('todayWage').textContent=tRec.wage;
-  }else{segList.innerHTML='<div class="no-record">今天还没打卡</div>';document.getElementById('todaySummary').style.display='none';}
+  }else{
+    segList.innerHTML='<div class="no-record">今天还没打卡</div>';
+    document.getElementById('todaySummary').style.display='none';
+  }
 
   // 记录分组
-  const cyc=settings.settleCycle||3;
-  const groups={};
-  mr.forEach(r=>{const idx=Math.floor((parseDate(r.date).getDate()-1)/cyc);if(!groups[idx])groups[idx]={items:[],totalH:0,totalW:0,allSettled:true};groups[idx].items.push(r);groups[idx].totalH+=r.hours;groups[idx].totalW+=r.wage;if(!r.settled)groups[idx].allSettled=false;});
-  const grpEl=document.getElementById('recordGroups');
-  if(mr.length===0){grpEl.innerHTML='<div class="no-record">本月暂无记录<br>点「补录历史月份」添加</div>';}
-  else{
-    grpEl.innerHTML=Object.keys(groups).sort((a,b)=>b-a).map(k=>{
-      const g=groups[k],idx=+k,start=idx*cyc+1,end=Math.min(start+cyc-1,new Date(y,m+1,0).getDate());
-      const st=g.allSettled?'settled':'unsettled',sl=g.allSettled?'✅ 已结清':'⏳ 待结算';
-      return `<div class="group-header"><div class="gh-left"><span class="gh-badge ${st}">${sl}</span><span>第${+k+1}组 · ${start}-${end}日</span></div><div class="gh-right"><span>${g.totalH.toFixed(1)}h / ${g.totalW}元</span>${!g.allSettled?`<button class="gh-action" onclick="settleGroup(${k})">结清这组</button>`:''}</div></div>`+
-        g.items.map(r=>`<div class="record-item${r.settled?' settled':''}"><div class="record-left"><div class="date">${formatDateFull(r.date)} ${weekDay(r.date)}${r.settled?' ✅':''}</div><div class="segments-preview">${r.segments.map(s=>`<span class="seg-chip">${fmtTime(s.start)}~${fmtTime(s.end)}</span>`).join('')}</div></div><div class="record-right"><div class="record-stats"><div class="hours">${r.hours}h</div><div class="wage">${r.wage}元</div></div><div class="record-actions"><button class="settle-btn ${r.settled?'settled':'unsettled'}" onclick="toggleSettle('${r.date}')">${r.settled?'✅已结':'⬜未结'}</button><button class="delete-btn" onclick="deleteRecord('${r.date}')">删</button></div></div></div>`).join('');
+  var cyc=settings.settleCycle||3;
+  var groups={};
+  mr.forEach(function(r){
+    var idx=Math.floor((parseDate(r.date).getDate()-1)/cyc);
+    if(!groups[idx])groups[idx]={items:[],totalH:0,totalW:0,allSettled:true};
+    groups[idx].items.push(r);
+    groups[idx].totalH+=r.hours;
+    groups[idx].totalW+=r.wage;
+    if(!r.settled)groups[idx].allSettled=false;
+  });
+  var grpEl=document.getElementById('recordGroups');
+  if(mr.length===0){
+    grpEl.innerHTML='<div class="no-record">本月暂无记录<br>点「补录历史月份」添加</div>';
+  }else{
+    grpEl.innerHTML=Object.keys(groups).sort(function(a,b){return b-a;}).map(function(k){
+      var g=groups[k],idx=+k,start=idx*cyc+1,end=Math.min(start+cyc-1,new Date(y,m+1,0).getDate());
+      var st=g.allSettled?'settled':'unsettled',sl=g.allSettled?'&#9989; 已结清':'&#9203; 待结算';
+      return '<div class="group-header"><div class="gh-left"><span class="gh-badge '+st+'">'+sl+'</span><span>第'+(+k+1)+'组 &middot; '+start+'-'+end+'日</span></div><div class="gh-right"><span>'+g.totalH.toFixed(1)+'h / '+g.totalW+'元</span>'+(!g.allSettled?'<button class="gh-action" onclick="settleGroup('+k+')">结清这组</button>':'')+'</div></div>'+
+        g.items.map(function(r){
+          return '<div class="record-item'+(r.settled?' settled':'')+'"><div class="record-left"><div class="date">'+formatDateFull(r.date)+' '+weekDay(r.date)+(r.settled?' &#9989;':'')+'</div><div class="segments-preview">'+r.segments.map(function(s){return '<span class="seg-chip">'+fmtTime(s.start)+'~'+fmtTime(s.end)+'</span>';}).join('')+'</div></div><div class="record-right"><div class="record-stats"><div class="hours">'+r.hours+'h</div><div class="wage">'+r.wage+'元</div></div><div class="record-actions"><button class="settle-btn '+(r.settled?'settled':'unsettled')+'" onclick="toggleSettle(\''+r.date+'\')">'+(r.settled?'&#9989;已结':'&#11036;未结')+'</button><button class="delete-btn" onclick="deleteRecord(\''+r.date+'\')">删</button></div></div></div>';
+        }).join('');
     }).join('');
   }
 
-  // 时薪
   document.getElementById('homeRate').value=settings.rate;
   document.getElementById('cycleInput').value=settings.settleCycle;
 }
 
 // ===== 日历 =====
 function refreshCalendar(){
-  const y=calYear,m=calMonth;
+  var y=calYear,m=calMonth;
   document.getElementById('calMonthLabel').textContent=y+'年'+(m+1)+'月';
-  const firstDay=new Date(y,m,1).getDay();
-  const daysInMonth=new Date(y,m+1,0).getDate();
-  const today=todayStr();
-  let html='';
-  for(let i=0;i<firstDay;i++)html+='<div class="cal-day empty"></div>';
-  for(let d=1;d<=daysInMonth;d++){
-    const ds=y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
-    const rec=getRecord(ds);
-    let cls='cal-day';
-    if(ds===today)cls+=' today';else if(rec&&rec.settled)cls+=' settled-day';else if(rec)cls+=' has-record';
-    const hrs=rec?rec.hours:0;
-    html+=`<div class="${cls}" onclick="onCalDayClick('${ds}')"><span class="day-num">${d}</span>${hrs?`<span class="day-hours">${hrs}h</span>`:''}</div>`;
+  var firstDay=new Date(y,m,1).getDay();
+  var daysInMonth=new Date(y,m+1,0).getDate();
+  var today=todayStr();
+  var html='';
+  for(var i=0;i<firstDay;i++)html+='<div class="cal-day empty"></div>';
+  for(var d=1;d<=daysInMonth;d++){
+    var ds=y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    var rec=getRecord(ds);
+    var cls='cal-day';
+    if(ds===today)cls+=' today';
+    else if(rec&&rec.settled)cls+=' settled-day';
+    else if(rec)cls+=' has-record';
+    var hrs=rec?rec.hours:0;
+    html+='<div class="'+cls+'" onclick="onCalDayClick(\''+ds+'\')"><span class="day-num">'+d+'</span>'+(hrs?'<span class="day-hours">'+hrs+'h</span>':'')+'</div>';
   }
   document.getElementById('calDays').innerHTML=html;
 }
 
 // ===== 统计 =====
 function refreshStats(){
-  const tw=records.reduce((s,r)=>s+r.wage,0),th=records.reduce((s,r)=>s+r.hours,0);
+  var tw=records.reduce(function(s,r){return s+r.wage;},0);
+  var th=records.reduce(function(s,r){return s+r.hours;},0);
   document.getElementById('statTotalWage').textContent=tw;
   document.getElementById('statTotalHours').textContent=th.toFixed(1);
   document.getElementById('statTotalDays').textContent=records.length;
-  const maxDay=records.reduce((m,r)=>r.wage>m?r.wage:m,0);
+  var maxDay=records.reduce(function(m,r){return r.wage>m?r.wage:m;},0);
   document.getElementById('statMaxWage2').textContent=maxDay||'--';
-  document.getElementById('statOvertime').textContent=records.filter(r=>r.hours>settings.overtimeThreshold).length;
-  // 柱状图近7周
-  const weeks=[],now=new Date();
-  for(let i=6;i>=0;i--){const start=new Date(now);start.setDate(now.getDate()-i*7-now.getDay());const end=new Date(start);end.setDate(start.getDate()+6);const wh=records.filter(r=>{const d=parseDate(r.date);return d>=start&&d<=end;}).reduce((s,r)=>s+r.hours,0);weeks.push({label:(start.getMonth()+1)+'/'+start.getDate(),h:wh});}
-  const maxH=Math.max(...weeks.map(w=>w.h),1);
-  document.getElementById('barChart').innerHTML=weeks.map(w=>`<div class="bar-group"><div class="bar-value">${w.h}h</div><div class="bar" style="height:${w.h/maxH*140}px"></div><div class="bar-label">${w.label}</div></div>`).join('');
+  document.getElementById('statOvertime').textContent=records.filter(function(r){return r.hours>settings.overtimeThreshold;}).length;
+  // 柱状图
+  var weeks=[],now=new Date();
+  for(var i=6;i>=0;i--){
+    var start=new Date(now);
+    start.setDate(now.getDate()-i*7-start.getDay());
+    var end=new Date(start);
+    end.setDate(start.getDate()+6);
+    var wh=records.filter(function(r){
+      var d=parseDate(r.date);
+      return d>=start&&d<=end;
+    }).reduce(function(s,r){return s+r.hours;},0);
+    weeks.push({label:(start.getMonth()+1)+'/'+start.getDate(),h:wh});
+  }
+  var maxH=Math.max.apply(null,weeks.map(function(w){return w.h;}).concat([1]));
+  document.getElementById('barChart').innerHTML=weeks.map(function(w){
+    return '<div class="bar-group"><div class="bar-value">'+w.h+'h</div><div class="bar" style="height:'+(w.h/maxH*140)+'px"></div><div class="bar-label">'+w.label+'</div></div>';
+  }).join('');
 }
 
 // ===== 工资表 =====
 function refreshPayslip(){
-  const y=payslipYear,m=payslipMonth;
+  var y=payslipYear,m=payslipMonth;
   document.getElementById('payslipMonthLabel').textContent=y+'年'+(m+1)+'月 工资表';
-  const mr=getMonthRecs(y,m);
-  const body=document.getElementById('payslipBody');
-  if(mr.length===0){body.innerHTML='<tr><td colspan="8" class="no-record">本月暂无记录</td></tr>';}
-  else{
-    body.innerHTML=mr.map(r=>{
-      const segs=r.segments.map(s=>fmtTime(s.start)+'~'+fmtTime(s.end)).join(' ');
-      return `<tr class="${r.settled?'settled-row':''}"><td class="date-col">${formatDateFull(r.date)}</td><td>${weekDay(r.date)}</td><td>${r.segments[0]?fmtTime(r.segments[0].start):'--'}</td><td>${r.segments[0]?fmtTime(r.segments[0].end):'--'}</td><td>${r.hours}</td><td>${settings.rate}</td><td>${r.wage}</td><td>${r.settled?'✅':'⏳'}</td></tr>`+
-        r.segments.slice(1).map(s=>`<tr class="${r.settled?'settled-row':''}"><td></td><td></td><td>${fmtTime(s.start)}</td><td>${fmtTime(s.end)}</td><td>${calcSegHours(s.start,s.end)}</td><td>${settings.rate}</td><td>${calcWage(calcSegHours(s.start,s.end))}</td><td></td></tr>`).join('');
+  var mr=getMonthRecs(y,m);
+  var body=document.getElementById('payslipBody');
+  if(mr.length===0){
+    body.innerHTML='<tr><td colspan="8" class="no-record">本月暂无记录</td></tr>';
+  }else{
+    body.innerHTML=mr.map(function(r){
+      var segs=r.segments.map(function(s){return fmtTime(s.start)+'~'+fmtTime(s.end);}).join(' ');
+      return '<tr class="'+(r.settled?'settled-row':'')+'"><td class="date-col">'+formatDateFull(r.date)+'</td><td>'+weekDay(r.date)+'</td><td>'+(r.segments[0]?fmtTime(r.segments[0].start):'--')+'</td><td>'+(r.segments[0]?fmtTime(r.segments[0].end):'--')+'</td><td>'+r.hours+'</td><td>'+settings.rate+'</td><td>'+r.wage+'</td><td>'+(r.settled?'&#9989;':'&#9203;')+'</td></tr>'+
+        r.segments.slice(1).map(function(s){
+          return '<tr class="'+(r.settled?'settled-row':'')+'"><td></td><td></td><td>'+fmtTime(s.start)+'</td><td>'+fmtTime(s.end)+'</td><td>'+calcSegHours(s.start,s.end)+'</td><td>'+settings.rate+'</td><td>'+calcWage(calcSegHours(s.start,s.end))+'</td><td></td></tr>';
+        }).join('');
     }).join('');
   }
-  const tw=mr.reduce((s,r)=>s+r.wage,0),th=mr.reduce((s,r)=>s+r.hours,0);
-  const sw=mr.filter(r=>r.settled).reduce((s,r)=>s+r.wage,0);
-  document.getElementById('payslipFoot').innerHTML=`<tr style="font-weight:700;background:#f8f9fc;"><td colspan="4">合计(${mr.length}天)</td><td>${th.toFixed(1)}</td><td></td><td>${tw}</td><td></td></tr>`;
+  var tw=mr.reduce(function(s,r){return s+r.wage;},0);
+  var th=mr.reduce(function(s,r){return s+r.hours;},0);
+  var sw=mr.filter(function(r){return r.settled;}).reduce(function(s,r){return s+r.wage;},0);
+  document.getElementById('payslipFoot').innerHTML='<tr style="font-weight:700;background:#f8f9fc;"><td class="date-col" colspan="4">合计</td><td>'+th.toFixed(1)+'</td><td></td><td>'+tw+'</td><td></td></tr>';
   document.getElementById('psTotalWage').textContent=tw;
   document.getElementById('psTotalHours').textContent=th.toFixed(1);
   document.getElementById('psTotalDays').textContent=mr.length;
   document.getElementById('psSettledWage').textContent=sw;
   document.getElementById('psUnsettledWage').textContent=tw-sw;
-  document.getElementById('psOvertimeDays').textContent=mr.filter(r=>r.hours>settings.overtimeThreshold).length;
+  document.getElementById('psOvertimeDays').textContent=mr.filter(function(r){return r.hours>settings.overtimeThreshold;}).length;
 }
 
 // ===== 备忘 =====
 function refreshMemos(){
-  const list=document.getElementById('memoList');
+  var list=document.getElementById('memoList');
   if(memos.length===0){list.innerHTML='<div class="no-record">暂无备忘</div>';return;}
-  list.innerHTML=memos.map((m,i)=>`<div class="memo-item"><div><div class="memo-text">${m.text}</div><div class="memo-date">${m.date}</div></div><button class="del-memo" onclick="delMemo(${i})">删除</button></div>`).join('');
+  list.innerHTML=memos.map(function(m,i){
+    return '<div class="memo-item"><div><div class="memo-text">'+m.text+'</div><div class="memo-date">'+m.date+'</div></div><button class="del-memo" onclick="deleteMemo('+i+')">删除</button></div>';
+  }).join('');
 }
-function addMemo(){const t=document.getElementById('memoInput').value.trim();if(!t)return;memos.unshift({text:t,date:todayStr()});document.getElementById('memoInput').value='';saveData();refreshMemos();}
-function delMemo(i){memos.splice(i,1);saveData();refreshMemos();}
+function addMemo(){
+  var v=document.getElementById('memoInput').value.trim();
+  if(!v)return;
+  memos.push({text:v,date:todayStr()});
+  document.getElementById('memoInput').value='';
+  saveData();
+  refreshMemos();
+}
+function deleteMemo(i){
+  openModal('删除备忘','确定删除这条备忘？','danger',function(){
+    memos.splice(i,1);saveData();refreshMemos();
+  });
+}
 
 // ===== 设置 =====
 function refreshSettingsUI(){
@@ -826,340 +956,502 @@ function saveSettings(){
   settings.overtimeThreshold=+document.getElementById('setOvertime').value||8;
   settings.overtimeRate=+document.getElementById('setOvertimeRate').value||1;
   settings.settleCycle=+document.getElementById('setCycle').value||3;
-  settings.workerName=document.getElementById('setName').value.trim();
-  settings.workerId=document.getElementById('setWorkerId').value.trim();
-  saveData();refreshAll();showToast('✅ 设置已保存');
+  settings.workerName=document.getElementById('setName').value;
+  settings.workerId=document.getElementById('setWorkerId').value;
+  saveData();
+  showToast('设置已保存');
+  refreshAll();
 }
-function updateRate(){settings.rate=+document.getElementById('homeRate').value||0;saveData();}
-function updateCycle(){settings.settleCycle=+document.getElementById('cycleInput').value||3;saveData();}
+function updateRate(){
+  settings.rate=+document.getElementById('homeRate').value||0;
+  saveData();
+  refreshAll();
+}
+function updateCycle(){
+  settings.settleCycle=+document.getElementById('cycleInput').value||3;
+  saveData();
+  refreshHome();
+}
 
 // ===== 结算 =====
-function toggleSettle(d){const r=getRecord(d);if(!r)return;r.settled=!r.settled;saveData();refreshAll();}
+function toggleSettle(d){
+  var r=getRecord(d);
+  if(!r)return;
+  r.settled=!r.settled;
+  saveData();
+  refreshAll();
+}
 function settleGroup(k){
-  const y=currentYear,m=currentMonth,cyc=settings.settleCycle||3;
-  const startIdx=k*cyc+1;
-  records.forEach(r=>{const d=parseDate(r.date);if(d.getFullYear()===y&&d.getMonth()===m){const idx=Math.floor((d.getDate()-1)/cyc);if(idx===k)r.settled=true;}});
-  saveData();refreshAll();showToast('✅ 该组已结清');
+  var y=currentYear,m=currentMonth;
+  var cyc=settings.settleCycle||3;
+  var start=k*cyc+1,end=Math.min(start+cyc-1,new Date(y,m+1,0).getDate());
+  for(var d=start;d<=end;d++){
+    var ds=y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    var r=getRecord(ds);
+    if(r)r.settled=true;
+  }
+  saveData();
+  refreshAll();
+  showToast('已结清第'+(+k+1)+'组');
 }
 function settleAllMonth(){
-  const y=currentYear,m=currentMonth;
-  records.forEach(r=>{const d=parseDate(r.date);if(d.getFullYear()===y&&d.getMonth()===m)r.settled=true;});
-  saveData();refreshAll();showToast('✅ 本月已全部结清');
+  openModal('一键结清','确定将本月所有记录标记为已结算？','confirm',function(){
+    var y=currentYear,m=currentMonth;
+    getMonthRecs(y,m).forEach(function(r){r.settled=true;});
+    saveData();refreshAll();showToast('本月已全部结清');
+  });
 }
 
-// ===== Tab切换 =====
+// ===== 月份切换 =====
+function changeMonth(dir){
+  currentMonth+=dir;
+  if(currentMonth>11){currentMonth=0;currentYear++;}
+  if(currentMonth<0){currentMonth=11;currentYear--;}
+  refreshHome();
+}
+function changeCalMonth(dir){
+  calMonth+=dir;
+  if(calMonth>11){calMonth=0;calYear++;}
+  if(calMonth<0){calMonth=11;calYear--;}
+  refreshCalendar();
+}
+function changePayslipMonth(dir){
+  payslipMonth+=dir;
+  if(payslipMonth>11){payslipMonth=0;payslipYear++;}
+  if(payslipMonth<0){payslipMonth=11;payslipYear--;}
+  refreshPayslip();
+}
+
+// ===== Tab 切换 =====
 function switchTab(name,el){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab-item').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tab-item').forEach(function(t){t.classList.remove('active');});
   document.getElementById('page-'+name).classList.add('active');
-  el.classList.add('active');
+  if(el)el.classList.add('active');
+  if(name==='calendar')refreshCalendar();
+  if(name==='stats')refreshStats();
   if(name==='payslip')refreshPayslip();
+  if(name==='memo')refreshMemos();
+  if(name==='settings')refreshSettingsUI();
 }
-
-// ===== 月份导航 =====
-function changeMonth(d){currentMonth+=d;if(currentMonth>11){currentMonth=0;currentYear++;}if(currentMonth<0){currentMonth=11;currentYear--;}refreshHome();}
-function changeCalMonth(d){calMonth+=d;if(calMonth>11){calMonth=0;calYear++;}if(calMonth<0){calMonth=11;calYear--;}refreshCalendar();}
-function changePayslipMonth(d){payslipMonth+=d;if(payslipMonth>11){payslipMonth=0;payslipYear++;}if(payslipMonth<0){payslipMonth=11;payslipYear--;}refreshPayslip();}
 
 // ===== 弹窗 =====
 function openModal(title,text,type,cb){
   document.getElementById('modalTitle').textContent=title;
   document.getElementById('modalText').textContent=text;
+  var btn=document.getElementById('modalConfirm');
+  btn.onclick=function(){closeModal();cb&&cb();};
   document.getElementById('settleModal').classList.add('show');
-  const btn=document.getElementById('modalConfirm');
-  btn.onclick=()=>{closeModal();cb&&cb();};
 }
-function closeModal(){document.getElementById('settleModal').classList.remove('show');}
+function closeModal(){
+  document.getElementById('settleModal').classList.remove('show');
+}
 
 // ===== 时间段弹窗 =====
-function openSegmentModal(){document.getElementById('segmentModal').classList.add('show');setSegType('start');}
-function closeSegmentModal(){document.getElementById('segmentModal').classList.remove('show');}
-function setSegType(t){segType=t;document.getElementById('segTypeStart').className='seg-type-btn start'+(t==='start'?' active':'');document.getElementById('segTypeEnd').className='seg-type-btn end'+(t==='end'?' active':'');}
+function setSegType(t){
+  segType=t;
+  document.getElementById('segTypeStart').classList.toggle('active',t==='start');
+  document.getElementById('segTypeEnd').classList.toggle('active',t==='end');
+}
+function openSegmentModal(){
+  document.getElementById('segStartTime').value='08:00';
+  document.getElementById('segEndTime').value='12:00';
+  document.getElementById('segmentModal').classList.add('show');
+}
+function closeSegmentModal(){
+  document.getElementById('segmentModal').classList.remove('show');
+}
 function saveSegment(){
-  const s=document.getElementById('segStartTime').value,e=document.getElementById('segEndTime').value;
-  if(!s||!e){showToast('请填写完整时间');return;}
-  const today=todayStr(),rec=ensureRecord(today);
-  if(segType==='start'){rec.segments.push({start:s,end:''});}
-  else{const o=rec.segments.filter(x=>x.start&&!x.end).pop();if(o)o.end=e;else rec.segments.push({start:'',end:e});}
-  rec.segments.forEach(x=>{if(x.start&&x.end)x.hours=calcSegHours(x.start,x.end);else x.hours=0;});
-  rec.hours=rec.segments.reduce((s,x)=>s+(x.hours||0),0);rec.wage=calcWage(rec.hours);
-  saveData();refreshAll();closeSegmentModal();showToast('✅ 已保存');
+  var s=document.getElementById('segStartTime').value;
+  var e=document.getElementById('segEndTime').value;
+  if(segType==='start'){
+    var today=todayStr();
+    var rec=ensureRecord(today);
+    rec.segments.push({start:s,end:''});
+    showToast('已添加上班段: '+s);
+  }else{
+    var today=todayStr();
+    var rec=ensureRecord(today);
+    var open=rec.segments.filter(function(x){return x.start&&!x.end;}).pop();
+    if(open){open.end=e;showToast('已闭合段: '+open.start+'~'+e);}
+    else{rec.segments.push({start:'',end:e});showToast('已添加下班段: '+e);}
+  }
+  rec.segments.forEach(function(x){if(x.start&&x.end)x.hours=calcSegHours(x.start,x.end);else x.hours=0;});
+  rec.hours=rec.segments.reduce(function(s,x){return s+x.hours;},0);
+  rec.wage=calcWage(rec.hours);
+  saveData();refreshAll();closeSegmentModal();
 }
 
 // ===== 时间编辑 =====
-let editDate='',editSegIdx=0;
-function editSegment(d,i){
-  editDate=d;editSegIdx=i;
-  const s=getRecord(d).segments[i];
-  document.getElementById('editStartTime').value=s.start||'09:00';
-  document.getElementById('editEndTime').value=s.end||'18:00';
-  document.getElementById('timeEditInfo').textContent='';
+function editSegment(date,i){
+  var rec=getRecord(date);
+  if(!rec||!rec.segments[i])return;
+  editTargetDate=date;
+  editSegIndex=i;
+  document.getElementById('editStartTime').value=rec.segments[i].start||'09:00';
+  document.getElementById('editEndTime').value=rec.segments[i].end||'18:00';
+  document.getElementById('timeEditInfo').textContent='预览：工时 '+calcSegHours(rec.segments[i].start||'09:00',rec.segments[i].end||'18:00')+'h，工资 '+calcWage(calcSegHours(rec.segments[i].start||'09:00',rec.segments[i].end||'18:00'))+'元';
   document.getElementById('timeEditModal').classList.add('show');
 }
-function closeTimeEdit(){document.getElementById('timeEditModal').classList.remove('show');}
-function saveTimeEdit(){
-  const s=document.getElementById('editStartTime').value,e=document.getElementById('editEndTime').value;
-  const rec=getRecord(editDate);
-  if(!rec||!rec.segments[editSegIdx]){closeTimeEdit();return;}
-  rec.segments[editSegIdx].start=s;rec.segments[editSegIdx].end=e;
-  rec.segments.forEach(x=>{if(x.start&&x.end)x.hours=calcSegHours(x.start,x.end);else x.hours=0;});
-  rec.hours=rec.segments.reduce((s,x)=>s+(x.hours||0),0);rec.wage=calcWage(rec.hours);
-  saveData();refreshAll();closeTimeEdit();showToast('✅ 时间已更新');
+function closeTimeEdit(){
+  document.getElementById('timeEditModal').classList.remove('show');
 }
-function deleteSegment(d,i){
-  const rec=getRecord(d);if(!rec)return;
-  rec.segments.splice(i,1);
-  rec.hours=rec.segments.reduce((s,x)=>s+(x.hours||0),0);rec.wage=calcWage(rec.hours);
-  if(rec.segments.length===0)records=records.filter(r=>r.date!==d);
-  saveData();refreshAll();showToast('🗑 已删除该段');
+function saveTimeEdit(){
+  var rec=getRecord(editTargetDate);
+  if(!rec||!rec.segments[editSegIndex]){closeTimeEdit();return;}
+  rec.segments[editSegIndex].start=document.getElementById('editStartTime').value;
+  rec.segments[editSegIndex].end=document.getElementById('editEndTime').value;
+  rec.segments.forEach(function(s){if(s.start&&s.end)s.hours=calcSegHours(s.start,s.end);else s.hours=0;});
+  rec.hours=rec.segments.reduce(function(s,x){return s+x.hours;},0);
+  rec.wage=calcWage(rec.hours);
+  saveData();refreshAll();closeTimeEdit();showToast('时间已更新');
+}
+function deleteSegment(date,i){
+  var rec=getRecord(date);
+  if(!rec)return;
+  openModal('删除','确定删除这段记录？','danger',function(){
+    rec.segments.splice(i,1);
+    rec.hours=rec.segments.reduce(function(s,x){return s+x.hours;},0);
+    rec.wage=calcWage(rec.hours);
+    if(rec.segments.length===0)records=records.filter(function(r){return r.date!==date;});
+    saveData();refreshAll();
+  });
+}
+function deleteRecord(d){
+  openModal('删除',formatDateFull(d),'danger',function(){
+    records=records.filter(function(r){return r.date!==d;});
+    saveData();refreshAll();
+  });
 }
 
 // ===== 补录弹窗 =====
-let bfCurrentDate='';
 function openBackfillModal(){
-  const box=document.getElementById('backfillModal');
-  const ySel=document.getElementById('bfYear'),mSel=document.getElementById('bfMonth'),dSel=document.getElementById('bfDay');
-  const now=new Date();
-  ySel.innerHTML='';for(let y=now.getFullYear();y>=now.getFullYear()-5;y--)ySel.innerHTML+=`<option value="${y}">${y}年</option>`;
-  mSel.innerHTML='';for(let m=1;m<=12;m++)mSel.innerHTML+=`<option value="${m}">${m}月</option>`;
-  dSel.innerHTML='';for(let d=1;d<=31;d++)dSel.innerHTML+=`<option value="${d}">${d}日</option>`;
-  ySel.value=now.getFullYear();mSel.value=now.getMonth()+1;dSel.value=now.getDate();
-  box.classList.add('show');onBfDateChange();
+  var yearSel=document.getElementById('bfYear');
+  var monthSel=document.getElementById('bfMonth');
+  var daySel=document.getElementById('bfDay');
+  var now=new Date();
+  yearSel.innerHTML='';
+  for(var y=now.getFullYear();y>=now.getFullYear()-5;y--){
+    yearSel.innerHTML+='<option value="'+y+'">'+(y===now.getFullYear()?'今年':y===now.getFullYear()-1?'去年':y+'年')+'</option>';
+  }
+  monthSel.innerHTML='';
+  for(var m=1;m<=12;m++)monthSel.innerHTML+='<option value="'+m+'">'+m+'月</option>';
+  daySel.innerHTML='';
+  for(var d=1;d<=31;d++)daySel.innerHTML+='<option value="'+d+'">'+d+'日</option>';
+  yearSel.value=now.getFullYear();
+  monthSel.value=now.getMonth()+1;
+  daySel.value=now.getDate();
+  onBfDateChange();
+  document.getElementById('backfillModal').classList.add('show');
 }
-function closeBackfillModal(){document.getElementById('backfillModal').classList.remove('show');}
+function closeBackfillModal(){
+  document.getElementById('backfillModal').classList.remove('show');
+}
 function onBfDateChange(){
-  const y=+document.getElementById('bfYear').value,m=+document.getElementById('bfMonth').value,d=+document.getElementById('bfDay').value;
-  const max=new Date(y,m,0).getDate();
-  if(d>max)d=max;
-  bfCurrentDate=y+'-'+String(m).padStart(2,'0')+'-'+String(d).padStart(2,'0');
-  document.getElementById('bfTarget').textContent='补录日期：'+formatDateFull(bfCurrentDate)+' '+weekDay(bfCurrentDate);
-  const rec=getRecord(bfCurrentDate);
-  const el=document.getElementById('bfExisting');
-  if(rec&&rec.segments.length){el.innerHTML='<div class="bf-existing-title">📋 已有记录：</div>'+rec.segments.map((s,i)=>`<div style="font-size:12px;padding:4px 0;display:flex;justify-content:space-between;align-items:center;"><span>${fmtTime(s.start)}→${fmtTime(s.end)} ${s.hours}h ${calcWage(s.hours)}元</span><button onclick="bfDelSeg(${i})" style="background:none;border:none;color:var(--red);cursor:pointer;">🗑</button></div>`).join('')+'<div style="font-size:13px;font-weight:700;color:var(--blue);margin-top:6px;">当日合计：'+rec.hours+'h / '+rec.wage+'元</div>';}
-  else{el.innerHTML='<div class="bf-existing-title" style="color:#bbb;">📋 暂无记录</div>';}
+  var y=+document.getElementById('bfYear').value;
+  var m=+document.getElementById('bfMonth').value;
+  var d=+document.getElementById('bfDay').value;
+  // 修正天数
+  var maxDay=new Date(y,m,0).getDate();
+  var daySel=document.getElementById('bfDay');
+  daySel.innerHTML='';
+  for(var i=1;i<=maxDay;i++)daySel.innerHTML+='<option value="'+i+'">'+i+'日</option>';
+  if(d>maxDay)d=maxDay;
+  daySel.value=d;
+  var ds=y+'-'+String(m).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+  var days=['周日','周一','周二','周三','周四','周五','周六'];
+  var dt=new Date(y,m-1,d);
+  document.getElementById('bfTarget').textContent='补录日期：'+m+'月'+d+'日 '+days[dt.getDay()];
+  // 显示已有记录
+  var rec=getRecord(ds);
+  var html='';
+  if(rec&&rec.segments.length){
+    html='<div class="bf-existing-title">已有记录：</div>'+rec.segments.map(function(s,i){
+      return '<div style="padding:4px 0;font-size:13px;">&#128368; '+fmtTime(s.start)+' &rarr; '+fmtTime(s.end)+' <span style="color:var(--blue);">'+calcSegHours(s.start,s.end)+'h</span> <span style="color:var(--green);">'+calcWage(calcSegHours(s.start,s.end))+'元</span> <button onclick="bfDeleteSeg(\''+ds+'\','+i+')" style="border:none;background:none;color:var(--red);cursor:pointer;">&#128465;</button></div>';
+    }).join('');
+    html+='<div style="font-size:12px;color:var(--blue);font-weight:600;padding:4px 0;">当日合计：'+rec.hours+'h / '+rec.wage+'元</div>';
+  }
+  document.getElementById('bfExisting').innerHTML=html;
 }
 function bfQuickAdd(n){
-  const s=document.getElementById('bfQuickStart'+(n===2?'2':'')).value;
-  const e=document.getElementById('bfQuickEnd'+(n===2?'2':'')).value;
-  if(!s||!e){showToast('请填完整时间');return;}
-  const rec=ensureRecord(bfCurrentDate);
+  var s=document.getElementById('bfQuickStart'+(n===2?'2':'')).value;
+  var e=document.getElementById('bfQuickEnd'+(n===2?'2':'')).value;
+  var y=+document.getElementById('bfYear').value;
+  var m=+document.getElementById('bfMonth').value;
+  var d=+document.getElementById('bfDay').value;
+  var ds=y+'-'+String(m).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+  var rec=ensureRecord(ds);
   rec.segments.push({start:s,end:e});
-  rec.segments.forEach(x=>{if(x.start&&x.end)x.hours=calcSegHours(x.start,x.end);else x.hours=0;});
-  rec.hours=rec.segments.reduce((s,x)=>s+(x.hours||0),0);rec.wage=calcWage(rec.hours);
-  saveData();refreshAll();onBfDateChange();showToast('✅ 已添加');
+  rec.segments.forEach(function(x){if(x.start&&x.end)x.hours=calcSegHours(x.start,x.end);else x.hours=0;});
+  rec.hours=rec.segments.reduce(function(s,x){return s+x.hours;},0);
+  rec.wage=calcWage(rec.hours);
+  saveData();onBfDateChange();refreshAll();
+  showToast('已添加: '+s+'~'+e);
 }
 function bfSaveManual(){
-  const s=document.getElementById('bfSegStart').value,e=document.getElementById('bfSegEnd').value;
-  if(!s||!e){showToast('请填完整时间');return;}
-  const rec=ensureRecord(bfCurrentDate);
+  var s=document.getElementById('bfSegStart').value;
+  var e=document.getElementById('bfSegEnd').value;
+  var y=+document.getElementById('bfYear').value;
+  var m=+document.getElementById('bfMonth').value;
+  var d=+document.getElementById('bfDay').value;
+  var ds=y+'-'+String(m).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+  var rec=ensureRecord(ds);
   rec.segments.push({start:s,end:e});
-  rec.segments.forEach(x=>{if(x.start&&x.end)x.hours=calcSegHours(x.start,x.end);else x.hours=0;});
-  rec.hours=rec.segments.reduce((s,x)=>s+(x.hours||0),0);rec.wage=calcWage(rec.hours);
-  saveData();refreshAll();onBfDateChange();showToast('✅ 已保存');
+  rec.segments.forEach(function(x){if(x.start&&x.end)x.hours=calcSegHours(x.start,x.end);else x.hours=0;});
+  rec.hours=rec.segments.reduce(function(s,x){return s+x.hours;},0);
+  rec.wage=calcWage(rec.hours);
+  saveData();onBfDateChange();refreshAll();
+  showToast('已保存: '+s+'~'+e);
 }
-function bfDelSeg(i){const rec=getRecord(bfCurrentDate);if(!rec)return;rec.segments.splice(i,1);rec.hours=rec.segments.reduce((s,x)=>s+(x.hours||0),0);rec.wage=calcWage(rec.hours);if(rec.segments.length===0)records=records.filter(r=>r.date!==bfCurrentDate);saveData();refreshAll();onBfDateChange();}
-function onCalDayClick(ds){bfCurrentDate=ds;const d=parseDate(ds);document.getElementById('bfYear').value=d.getFullYear();document.getElementById('bfMonth').value=d.getMonth()+1;document.getElementById('bfDay').value=d.getDate();document.getElementById('backfillModal').classList.add('show');onBfDateChange();}
-
-// ===== 导出 =====
-function doExport(type){
-  if(type==='copy'){copyTextExport();}
-  else if(type==='share'){shareExport();}
-  else if(type==='download'){downloadTextExport();}
-  else if(type==='print'){openPrintPreview();}
-  else if(type==='jpg'){generateJPGPreview();}
-}
-function copyTextExport(){
-  const mr=getMonthRecs(payslipYear,payslipMonth),lines=[];
-  lines.push('===== '+payslipYear+'年'+(payslipMonth+1)+'月 工资表 =====');
-  if(settings.workerName)lines.push('姓名: '+(settings.workerName||''));
-  if(settings.workerId)lines.push('工号: '+settings.workerId);
-  lines.push('时薪: '+settings.rate+' 元/小时');lines.push('');
-  lines.push('日期	星期	上班	下班	工时	工资	状态');
-  mr.forEach(r=>{const st=r.settled?'已结':'未结';r.segments.forEach((s)=>{lines.push(formatDateFull(r.date)+'	'+weekDay(r.date)+'	'+fmtTime(s.start)+'	'+fmtTime(s.end)+'	'+calcSegHours(s.start,s.end)+'h	'+calcWage(calcSegHours(s.start,s.end))+'元	'+st);});});
-  const tw=mr.reduce((s,r)=>s+r.wage,0),th=mr.reduce((s,r)=>s+r.hours,0);
-  lines.push('');lines.push('合计: '+mr.length+'天  '+th.toFixed(1)+'h  '+tw.toFixed(0)+'元');
-  const txt=lines.join('
-');
-  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(()=>showToast('✅ 已复制到剪贴板'),()=>fallbackCopy(txt));}
-  else{fallbackCopy(txt);}
-}
-function fallbackCopy(t){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('✅ 已复制');}
-function downloadTextExport(){
-  const mr=getMonthRecs(payslipYear,payslipMonth),lines=[];
-  lines.push('===== '+payslipYear+'年'+(payslipMonth+1)+'月 工资表 =====');
-  if(settings.workerName)lines.push('姓名: '+(settings.workerName||''));
-  if(settings.workerId)lines.push('工号: '+settings.workerId);
-  lines.push('时薪: '+settings.rate+' 元/小时');lines.push('');
-  lines.push('日期,星期,上班,下班,工时(h),时薪,工资(元),状态');
-  mr.forEach(r=>{const st=r.settled?'已结':'未结';r.segments.forEach((s)=>{lines.push(formatDateFull(r.date)+','+weekDay(r.date)+','+fmtTime(s.start)+','+fmtTime(s.end)+','+calcSegHours(s.start,s.end)+','+settings.rate+','+calcWage(calcSegHours(s.start,s.end))+','+st);});});
-  const tw=mr.reduce((s,r)=>s+r.wage,0),th=mr.reduce((s,r)=>s+r.hours,0);
-  lines.push('');lines.push('合计,'+mr.length+'天,,,'+th.toFixed(1)+','+settings.rate+','+tw.toFixed(0));
-  const csv=new Blob([lines.join('
-')],{type:'text/csv;charset=utf-8'}),u=URL.createObjectURL(csv),a=document.createElement('a');a.href=u;a.download=payslipYear+'年'+(payslipMonth+1)+'月工资表.csv';a.click();URL.revokeObjectURL(u);showToast('✅ CSV文件已下载');
-}
-function shareExport(){
-  const mr=getMonthRecs(payslipYear,payslipMonth),lines=['===== '+payslipYear+'年'+(payslipMonth+1)+'月 工资表 ====='];
-  if(settings.workerName)lines.push('姓名: '+(settings.workerName||''));
-  mr.forEach(r=>{lines.push(formatDateFull(r.date)+' '+weekDay(r.date)+' '+r.segments.map(s=>fmtTime(s.start)+'~'+fmtTime(s.end)).join(' ')+' '+r.hours+'h '+r.wage+'元 '+(r.settled?'✅':'⏳'));});
-  const tw=mr.reduce((s,r)=>s+r.wage,0);lines.push('合计: '+mr.length+'天 '+tw.toFixed(0)+'元');
-  const txt=lines.join('
-');
-  if(navigator.share){navigator.share({title:'工资表',text:txt}).then(()=>showToast('✅ 已分享')).catch(()=>copyTextExport());}
-  else{copyTextExport();}
+function bfDeleteSeg(ds,i){
+  var rec=getRecord(ds);
+  if(!rec)return;
+  rec.segments.splice(i,1);
+  rec.hours=rec.segments.reduce(function(s,x){return s+x.hours;},0);
+  rec.wage=calcWage(rec.hours);
+  if(rec.segments.length===0)records=records.filter(function(r){return r.date!==ds;});
+  saveData();onBfDateChange();refreshAll();
 }
 
-// ===== JPG 图片预览（内嵌DOM，base64直接渲染img，长按可保存）=====
-function generateJPGPreview(){
-  const mr=getMonthRecs(payslipYear,payslipMonth);
-  const pw=800;
-  // 计算高度
-  let rowCount=0;mr.forEach(r=>rowCount+=Math.max(r.segments.length,1));
-  const ph=Math.max(280+rowCount*26,400);
-  const c=document.createElement('canvas');c.width=pw;c.height=ph;
-  const ctx=c.getContext('2d');
+// ===== 日历点击 =====
+function onCalDayClick(ds){
+  // 打开补录弹窗并定位到那天
+  var p=ds.split('-');
+  document.getElementById('bfYear').value=+p[0];
+  document.getElementById('bfMonth').value=+p[1];
+  var maxDay=new Date(+p[0],+p[1],0).getDate();
+  var daySel=document.getElementById('bfDay');
+  daySel.innerHTML='';
+  for(var i=1;i<=maxDay;i++)daySel.innerHTML+='<option value="'+i+'">'+i+'日</option>';
+  daySel.value=+p[2];
+  onBfDateChange();
+  document.getElementById('backfillModal').classList.add('show');
+}
 
-  // 蓝色顶条
-  ctx.fillStyle='#4a7dff';ctx.fillRect(0,0,pw,56);
-  // 底部蓝色条
-  ctx.fillStyle='#4a7dff';ctx.fillRect(0,ph-32,pw,32);
-  // 白底
-  ctx.fillStyle='#fff';ctx.fillRect(0,56,pw,ph-88);
-  // 标题
-  ctx.fillStyle='#fff';ctx.font='bold 22px sans-serif';ctx.textAlign='center';ctx.fillText(payslipYear+'年'+(payslipMonth+1)+'月 工资表',pw/2,36);
-  // 个人信息
-  ctx.fillStyle='#333';ctx.font='13px sans-serif';ctx.textAlign='left';let y=78;
-  if(settings.workerName){ctx.fillText('姓名: '+settings.workerName,40,y);y+=22;}
-  if(settings.workerId){ctx.fillText('工号: '+settings.workerId,300,y);y+=22;}
-  ctx.fillText('时薪: '+settings.rate+' 元/小时',40,y);y+=26;
-  // 分隔线
-  ctx.fillStyle='#4a7dff';ctx.fillRect(30,y,740,2);y+=16;
-  // 表头
-  ctx.fillStyle='#4a7dff';ctx.fillRect(30,y-14,740,22);
-  ctx.fillStyle='#fff';ctx.font='bold 12px sans-serif';
-  ctx.fillText('日期',40,y);ctx.fillText('星期',130,y);ctx.fillText('上班',210,y);ctx.fillText('下班',300,y);ctx.fillText('工时',390,y);ctx.fillText('工资',470,y);ctx.fillText('状态',560,y);
-  y+=18;
-  // 表体
-  ctx.font='12px sans-serif';
-  let alt=false;
-  mr.forEach(r=>{
-    r.segments.forEach((s)=>{
-      if(alt)ctx.fillStyle='#f8f9fc';else ctx.fillStyle='#fff';
-      ctx.fillRect(30,y-14,740,22);
-      ctx.fillStyle='#333';
-      ctx.fillText(formatDateFull(r.date),40,y);
-      ctx.fillText(weekDay(r.date),130,y);
-      ctx.fillText(fmtTime(s.start),210,y);
-      ctx.fillText(fmtTime(s.end),300,y);
-      const sh=calcSegHours(s.start,s.end);
-      ctx.fillText(sh+'h',390,y);
-      ctx.fillText(calcWage(sh)+'元',470,y);
-      ctx.fillStyle=r.settled?'#2ecc71':'#e67e22';
-      ctx.fillText(r.settled?'✅已结':'⏳未结',560,y);
-      ctx.fillStyle='#333';
-      y+=24;alt=!alt;
+// ===== 导出功能 =====
+function doExport(mode){
+  var y=payslipYear,m=payslipMonth;
+  var mr=getMonthRecs(y,m);
+  if(mr.length===0){showToast('本月暂无记录');return;}
+
+  if(mode==='copy'){
+    var lines=[];
+    lines.push('===== '+y+'年'+(m+1)+'月 工资表 =====');
+    if(settings.workerName)lines.push('姓名: '+settings.workerName);
+    if(settings.workerId)lines.push('工号: '+settings.workerId);
+    lines.push('时薪: '+settings.rate+' 元/小时');
+    lines.push('');
+    lines.push('日期\t星期\t上班\t下班\t工时\t工资\t状态');
+    mr.forEach(function(r){
+      r.segments.forEach(function(s){
+        lines.push(formatDateFull(r.date)+'\t'+weekDay(r.date)+'\t'+fmtTime(s.start)+'\t'+fmtTime(s.end)+'\t'+calcSegHours(s.start,s.end)+'h\t'+calcWage(calcSegHours(s.start,s.end))+'元\t'+(r.settled?'已结':'未结'));
+      });
     });
-  });
-  if(mr.length===0){ctx.fillStyle='#999';ctx.textAlign='center';ctx.fillText('本月暂无记录',pw/2,y+10);ctx.textAlign='left';}
-  y+=10;
-  ctx.fillStyle='#4a7dff';ctx.fillRect(30,y,740,2);y+=18;
-  // 汇总
-  const tw=mr.reduce((s,r)=>s+r.wage,0),th=mr.reduce((s,r)=>s+r.hours,0);
-  ctx.fillStyle='#333';ctx.font='bold 14px sans-serif';
-  ctx.fillText('合计: '+mr.length+'天  总工时: '+th.toFixed(1)+'h  总工资: '+tw.toFixed(0)+'元',40,y);y+=24;
-  const sw=mr.filter(r=>r.settled).reduce((s,r)=>s+r.wage,0);
-  ctx.fillText('已结算: '+sw.toFixed(0)+'元  待结算: '+(tw-sw).toFixed(0)+'元  加班: '+mr.filter(r=>r.hours>settings.overtimeThreshold).length+'天',40,y);y+=26;
-  // 导出时间
-  ctx.font='11px sans-serif';ctx.fillStyle='#999';
-  ctx.fillText('导出时间: '+new Date().toLocaleString('zh-CN'),40,y);
-  // 底条文字
-  ctx.fillStyle='#fff';ctx.font='11px sans-serif';ctx.textAlign='center';
-  ctx.fillText('工时打卡App 生成',pw/2,ph-12);
+    var tw=mr.reduce(function(s,r){return s+r.wage;},0);
+    var th=mr.reduce(function(s,r){return s+r.hours;},0);
+    var sw=mr.filter(function(r){return r.settled;}).reduce(function(s,r){return s+r.wage;},0);
+    lines.push('');
+    lines.push('合计: '+mr.length+'天  总工时: '+th.toFixed(1)+'h  总工资: '+tw+'元');
+    lines.push('已结算: '+sw+'元  待结算: '+(tw-sw)+'元  加班: '+mr.filter(function(r){return r.hours>settings.overtimeThreshold;}).length+'天');
+    var txt=lines.join('\n');
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){showToast('已复制到剪贴板');});
+    }else{
+      var ta=document.createElement('textarea');
+      ta.value=txt;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('已复制到剪贴板');
+    }
+    return;
+  }
 
-  // ★ 关键：转成 base64 dataURI，直接塞进 <img> 的 src
-  const dataURI=c.toDataURL('image/jpeg',0.92);
+  if(mode==='download'){
+    var csv='日期,星期,上班,下班,工时,时薪,工资,状态\n';
+    mr.forEach(function(r){
+      r.segments.forEach(function(s){
+        csv+=formatDateFull(r.date)+','+weekDay(r.date)+','+fmtTime(s.start)+','+fmtTime(s.end)+','+calcSegHours(s.start,s.end)+'h,'+settings.rate+','+calcWage(calcSegHours(s.start,s.end))+'元,'+(r.settled?'已结':'未结')+'\n';
+      });
+    });
+    var b=new Blob([csv],{type:'text/csv'});
+    var u=URL.createObjectURL(b);
+    var a=document.createElement('a');
+    a.href=u;a.download='工资表_'+y+'_'+(m+1)+'.csv';a.click();
+    URL.revokeObjectURL(u);
+    showToast('已下载CSV');
+    return;
+  }
 
-  // 显示内嵌弹层
-  const overlay=document.getElementById('jpgPreviewOverlay');
-  const img=document.getElementById('jpgPreviewImg');
-  img.src=dataURI;
-  overlay.classList.add('show');
+  if(mode==='share'){
+    if(navigator.share){
+      var shareLines=[y+'年'+(m+1)+'月 工资表',''];
+      mr.forEach(function(r){
+        shareLines.push(formatDateFull(r.date)+' '+weekDay(r.date)+' '+r.hours+'h '+r.wage+'元 '+(r.settled?'已结':'未结'));
+      });
+      var tw=mr.reduce(function(s,r){return s+r.wage;},0);
+      shareLines.push('合计: '+tw+'元');
+      navigator.share({title:'工资表',text:shareLines.join('\n')}).catch(function(){});
+    }else{
+      doExport('copy');
+    }
+    return;
+  }
+
+  if(mode==='print'||mode==='jpg'){
+    // 用 Canvas 绘制工资表
+    var canvas=document.createElement('canvas');
+    var ctx=canvas.getContext('2d');
+    var W=800;
+    // 计算高度
+    var rowH=40,headerH=50,topH=140,summaryH=160;
+    var totalH=topH+headerH+mr.length*rowH+summaryH+40;
+    canvas.width=W;canvas.height=totalH;
+    // 背景
+    ctx.fillStyle='#fff';ctx.fillRect(0,0,W,totalH);
+    // 顶部装饰条
+    var grd=ctx.createLinearGradient(0,0,W,0);
+    grd.addColorStop(0,'#4a7dff');grd.addColorStop(1,'#6c5ce7');
+    ctx.fillStyle=grd;ctx.fillRect(0,0,W,8);
+    // 标题
+    ctx.fillStyle='#333';ctx.font='bold 28px sans-serif';ctx.textAlign='center';
+    ctx.fillText(y+'年'+(m+1)+'月 工资表',W/2,50);
+    // 个人信息
+    ctx.font='14px sans-serif';ctx.fillStyle='#666';
+    var infoY=80;
+    if(settings.workerName){ctx.textAlign='left';ctx.fillText('姓名: '+settings.workerName,W/2-200,infoY);}
+    if(settings.workerId){ctx.textAlign='center';ctx.fillText('工号: '+settings.workerId,W/2,infoY);}
+    ctx.textAlign='right';ctx.fillText('时薪: '+settings.rate+' 元/h',W/2+200,infoY);
+    // 表格
+    var tableTop=110;
+    var colW=[100,60,100,100,80,80,80,80];
+    var headers=['日期','星期','上班','下班','工时','时薪','工资','状态'];
+    // 表头背景
+    ctx.fillStyle='#eef3ff';ctx.fillRect(40,tableTop,W-80,headerH);
+    ctx.fillStyle='#4a7dff';ctx.font='bold 15px sans-serif';ctx.textAlign='center';
+    var cx=40;
+    headers.forEach(function(h,i){
+      ctx.fillText(h,cx+colW[i]/2,tableTop+headerH/2+5);
+      cx+=colW[i];
+    });
+    // 数据行
+    ctx.font='14px sans-serif';
+    mr.forEach(function(r,ri){
+      var yPos=tableTop+headerH+ri*rowH;
+      if(ri%2===1){ctx.fillStyle='#f8f9fc';ctx.fillRect(40,yPos,W-80,rowH);}
+      ctx.fillStyle=r.settled?'#999':'#333';
+      cx=40;
+      var rowData=[formatDateFull(r.date),weekDay(r.date),fmtTime(r.segments[0]?r.segments[0].start:''),fmtTime(r.segments[0]?r.segments[0].end:''),r.hours+'h',settings.rate+'',r.wage+'',r.settled?'已结':'未结'];
+      rowData.forEach(function(d,i){
+        ctx.fillText(d,cx+colW[i]/2,yPos+rowH/2+5);
+        cx+=colW[i];
+      });
+    });
+    // 汇总
+    var sumTop=tableTop+headerH+mr.length*rowH+20;
+    ctx.fillStyle='#eef3ff';ctx.fillRect(40,sumTop,W-80,summaryH);
+    ctx.fillStyle='#333';ctx.font='bold 16px sans-serif';ctx.textAlign='left';
+    var tw=mr.reduce(function(s,r){return s+r.wage;},0);
+    var th=mr.reduce(function(s,r){return s+r.hours;},0);
+    var sw=mr.filter(function(r){return r.settled;}).reduce(function(s,r){return s+r.wage;},0);
+    var ot=mr.filter(function(r){return r.hours>settings.overtimeThreshold;}).length;
+    ctx.fillText('出勤天数: '+mr.length+'天',80,sumTop+30);
+    ctx.fillText('总工时: '+th.toFixed(1)+'h',80,sumTop+60);
+    ctx.fillText('总工资: '+tw+'元',80,sumTop+90);
+    ctx.fillText('已结算: '+sw+'元',350,sumTop+30);
+    ctx.fillText('待结算: '+(tw-sw)+'元',350,sumTop+60);
+    ctx.fillText('加班天数: '+ot+'天',350,sumTop+90);
+    // 导出时间
+    ctx.font='12px sans-serif';ctx.fillStyle='#999';ctx.textAlign='center';
+    var now=new Date();
+    ctx.fillText('导出时间: '+now.getFullYear()+'/'+(now.getMonth()+1)+'/'+now.getDate()+' '+now.getHours()+':'+String(now.getMinutes()).padStart(2,'0'),W/2,totalH-15);
+    // 底条
+    ctx.fillStyle=grd;ctx.fillRect(0,totalH-6,W,6);
+
+    if(mode==='jpg'){
+      var dataUrl=canvas.toDataURL('image/jpeg',0.92);
+      document.getElementById('jpgPreviewImg').src=dataUrl;
+      document.getElementById('jpgPreviewOverlay').classList.add('show');
+    }else{
+      var dataUrl=canvas.toDataURL('image/jpeg',0.92);
+      document.getElementById('printPreviewImg').src=dataUrl;
+      document.getElementById('printPreviewOverlay').classList.add('show');
+    }
+  }
 }
 
 function closeJpgPreview(){
   document.getElementById('jpgPreviewOverlay').classList.remove('show');
 }
-
-// ===== 打印预览（内嵌DOM弹层，不调用window.open）=====
-function openPrintPreview(){
-  const mr=getMonthRecs(payslipYear,payslipMonth);
-  const pw=800,ph=Math.max(200+mr.length*30,400);
-  const c=document.createElement('canvas');c.width=pw;c.height=ph;
-  const ctx=c.getContext('2d');
-  ctx.fillStyle='#fff';ctx.fillRect(0,0,pw,ph);
-  ctx.fillStyle='#4a7dff';ctx.fillRect(0,0,pw,50);
-  ctx.fillStyle='#fff';ctx.font='bold 20px sans-serif';ctx.textAlign='center';ctx.fillText(payslipYear+'年'+(payslipMonth+1)+'月 工资表',pw/2,32);
-  ctx.fillStyle='#333';ctx.font='14px sans-serif';ctx.textAlign='left';let y=70;
-  if(settings.workerName){ctx.fillText('姓名: '+settings.workerName,30,y);y+=22;}
-  if(settings.workerId){ctx.fillText('工号: '+settings.workerId,300,y);y+=22;}
-  ctx.fillText('时薪: '+settings.rate+' 元/小时',30,y);y+=28;
-  ctx.fillStyle='#4a7dff';ctx.fillRect(20,y,760,2);y+=12;
-  ctx.font='bold 12px sans-serif';ctx.fillText('日期',30,y);ctx.fillText('星期',110,y);ctx.fillText('上班',190,y);ctx.fillText('下班',280,y);ctx.fillText('工时',370,y);ctx.fillText('工资',450,y);ctx.fillText('状态',560,y);y+=18;
-  ctx.fillStyle='#333';ctx.font='12px sans-serif';
-  mr.forEach(r=>{r.segments.forEach((s)=>{ctx.fillText(formatDateFull(r.date),30,y);ctx.fillText(weekDay(r.date),110,y);ctx.fillText(fmtTime(s.start),190,y);ctx.fillText(fmtTime(s.end),280,y);ctx.fillText(calcSegHours(s.start,s.end)+'h',370,y);ctx.fillText(calcWage(calcSegHours(s.start,s.end))+'元',450,y);ctx.fillText(r.settled?'✅已结':'⏳未结',560,y);y+=22;});});
-  y+=10;ctx.fillStyle='#4a7dff';ctx.fillRect(20,y,760,2);y+=18;
-  const tw=mr.reduce((s,r)=>s+r.wage,0),th=mr.reduce((s,r)=>s+r.hours,0);
-  ctx.fillStyle='#333';ctx.font='bold 14px sans-serif';ctx.fillText('合计: '+mr.length+'天  总工时: '+th.toFixed(1)+'h  总工资: '+tw.toFixed(0)+'元',30,y);y+=30;
-  const sw=mr.filter(r=>r.settled).reduce((s,r)=>s+r.wage,0);
-  ctx.fillText('已结算: '+sw.toFixed(0)+'元  待结算: '+(tw-sw).toFixed(0)+'元  加班: '+mr.filter(r=>r.hours>settings.overtimeThreshold).length+'天',30,y);y+=28;
-  ctx.font='11px sans-serif';ctx.fillStyle='#999';ctx.fillText('导出时间: '+new Date().toLocaleString('zh-CN'),30,y);
-
-  const dataURI=c.toDataURL('image/jpeg',0.92);
-  const overlay=document.getElementById('printPreviewOverlay');
-  document.getElementById('printPreviewImg').src=dataURI;
-  overlay.classList.add('show');
-}
-
 function closePrintPreview(){
   document.getElementById('printPreviewOverlay').classList.remove('show');
 }
-
 function doPrintFromPreview(){
-  // 用户主动点击按钮后才触发打印，不会被拦截
-  const img=document.getElementById('printPreviewImg');
-  const w=window.open('','_blank','width=800,height=900');
-  if(!w){showToast('⚠️ 请允许浏览器弹出窗口后再试');return;}
-  const _html = `<html><head><title>工资表打印</title><style>body{margin:0;padding:20px;text-align:center}img{max-width:100%;height:auto}</style></head><body><img src="${img.src}"></body></html>`;
-  w.document.write(_html);
+  var img=document.getElementById('printPreviewImg');
+  if(!img.src){showToast('请先生成预览');return;}
+  var w=window.open('');
+  if(!w){showToast('请允许弹出窗口');return;}
+  w.document.write('<html><head><title>打印</title></head><body style="margin:0;padding:20px;text-align:center;"><img src="'+img.src+'" style="max-width:100%;"><script>window.onload=function(){window.print();}<\/script></body></html>');
   w.document.close();
-  setTimeout(()=>{try{w.print();}catch(e){}},300);
-}
-
-</script>
-</body></html>');
-  w.document.close();
-  setTimeout(()=>{w.print();},300);
 }
 
 // ===== 数据管理 =====
-function exportJSON(){const d=JSON.stringify({records,memos,settings},null,2),b=new Blob([d],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='工时记录_'+todayStr()+'.json';a.click();URL.revokeObjectURL(u);showToast('✅ 已导出JSON');}
-function importData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){try{const d=JSON.parse(ev.target.result);if(d.records)d.records.forEach(r=>{if(typeof r.settled!=='boolean')r.settled=false;if(!r.segments&&r.start&&r.end)r.segments=[{start:r.start,end:r.end}];});records=d.records||records;if(d.memos)memos=d.memos;if(d.settings)settings={...settings,...d.settings};saveData();refreshAll();showToast('✅ 导入成功');}catch{showToast('❌ 格式错误');}};r.readAsText(f);}
-function clearAllData(){openModal('清空','⚠️确定吗？不可恢复！','danger',()=>{records=[];memos=[];saveData();refreshAll();showToast('已清空');});}
-function deleteRecord(d){openModal('删除',formatDateFull(d),'danger',()=>{records=records.filter(r=>r.date!==d);saveData();refreshAll();});}
+function exportJSON(){
+  var d=JSON.stringify({records:records,memos:memos,settings:settings},null,2);
+  var b=new Blob([d],{type:'application/json'});
+  var u=URL.createObjectURL(b);
+  var a=document.createElement('a');
+  a.href=u;a.download='工时记录_'+todayStr()+'.json';a.click();
+  URL.revokeObjectURL(u);
+  showToast('已导出JSON');
+}
+function importData(e){
+  var f=e.target.files[0];
+  if(!f)return;
+  var r=new FileReader();
+  r.onload=function(ev){
+    try{
+      var d=JSON.parse(ev.target.result);
+      if(d.records)d.records.forEach(function(r){
+        if(typeof r.settled!=='boolean')r.settled=false;
+        if(!r.segments&&r.start&&r.end)r.segments=[{start:r.start,end:r.end}];
+        if(!r.segments)r.segments=[];
+      });
+      if(d.records)records=d.records;
+      if(d.memos)memos=d.memos;
+      if(d.settings)settings=Object.assign(settings,d.settings);
+      saveData();refreshAll();showToast('导入成功');
+    }catch(err){showToast('格式错误');}
+  };
+  r.readAsText(f);
+}
+function clearAllData(){
+  openModal('清空','确定清空全部数据？不可恢复！','danger',function(){
+    records=[];memos=[];saveData();refreshAll();showToast('已清空');
+  });
+}
 
 // ===== 全局刷新 =====
-function refreshAll(){refreshHome();refreshCalendar();refreshStats();refreshPayslip();refreshMemos();refreshSettingsUI();}
+function refreshAll(){
+  refreshHome();
+  refreshCalendar();
+  refreshStats();
+  refreshPayslip();
+  refreshMemos();
+  refreshSettingsUI();
+}
+
+// ===== PWA 注册 =====
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+  });
+}
 
 // ===== 初始化 =====
 loadData();
 refreshAll();
-</script>
-
-<script>
-if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('./sw.js').catch(()=>{});
-  });
-}
 </script>
 </body>
 </html>
